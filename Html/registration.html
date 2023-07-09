@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>NEW PROJECT NAME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style_dark.css">
+    <link rel="stylesheet" href="styles/dropdown.css">
+    <script src="scripts/dark_mode.js"></script>
+  </head>
+  <body>
+
+    <table class="header_table">
+      <thead>
+        <tr>
+
+          <td align="left" style="width: 33%;">
+            <table>
+              <thead>
+                <tr>
+
+                  <td>
+                    <img src="images/logo.png" height="40" style="margin-left: 30px;">
+                  </td>
+
+                  <td>
+                    <p class="text4">PROJECT NAME</p>
+                  </td>
+
+                </tr>
+              </thead>
+            </table>
+          </td>
+
+          <td align="center" style="width: 34%;">
+            
+          </td>
+
+          <td align="right" style="width: 33%;">
+
+            <table>
+              <thead>
+                <tr>
+                  <td>
+                    <details class="dropdown _center">
+                      <summary role="button">
+                        <div class="language">
+                          <img src="images/ru.png" width="30px">
+                        </div>
+                      </summary>
+                      <ul>
+                        <li>
+                          <a href="#">
+                            <img src="images/uz.png" width="30px">
+                            <label class="language">O'zbekcha</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <img src="images/uz.png" width="30px">
+                            <label class="language">Ўзбекча</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <img src="images/ru.png" width="30px">
+                            <label class="language">Русский</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <img src="images/en.png" width="30px">
+                            <label class="language">English</label>
+                          </a>
+                        </li>
+                      </ul>
+                    </details>
+                  </td>
+
+                  <td>
+                    <div class="moon">
+                      <a onclick="myFunction()">
+                        <i class="fa fa-moon-o"></i>
+                      </a>
+                    </div>
+                  </td>
+
+                  <td>
+                    <details class="dropdown _right">
+                      <summary role="button">
+                        <div class="avatar _header">
+                          <img src="images/user.png" />
+                        </div>
+                      </summary>
+                      <ul>
+                        <li><a href="login.html">Войти в систему</a></li>
+                      </ul>
+                    </details>
+                  </td>
+                </tr>
+              </thead>
+            </table>
+                
+          </td>
+        </tr>
+      </thead>
+    </table>
+
+	<div class="big_container">
+
+		<div class="logo_container">
+			<div>
+				<p class="text5">Регистрация</p>
+			</div>
+			<div>
+				<p class="text6">Нужно войти в систему для использования всех возможностей сервиса</p>
+			</div>
+		</div>
+
+		<form action="" method="POST" enctype="multipart/form-data">
+			<div class="container _user">
+
+				<table style="width: 100%">
+					<thead>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="text">
+									<div class="place_holder">Имя<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<input type="text" class="input _default" placeholder="Фамилия">
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="text">
+									<div class="place_holder">Логин<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="text">
+									<div class="place_holder">Электронная почта<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="text">
+									<div class="place_holder">Номер телефона (мобильный)<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="password">
+									<div class="place_holder">Пароль<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="placeinput">
+									<input class="input _default" required="1" type="password">
+									<div class="place_holder">Пароль еще раз<span> *</span></div>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<input type="text" class="input _default" placeholder="Название организации">
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<input type="text" class="input _default" placeholder="Веб-страница">
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td align="center">
+								<div class="image-upload">
+									<label for="file-input">
+										<div class="avatar _registration _hover">
+											<img src="images/user.png">
+											<div class="overlay">
+												<div class="hover_text"><i class="fa fa-download"></i></div>
+											</div>
+										</div>
+									</label>
+									<input id="file-input" type="file" accept="image/*">
+								</div>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<label class="checkbox">Согласен с <a class="blue" href="#">условиями</a> использования сервисом
+									<input type="checkbox">
+									<span class="checkmark"></span>
+								</label>
+							</td>
+						</tr>
+						<tr><td style="height: 7px;"></td></tr>
+						<tr>
+							<td>
+								<button onclick="location.href='general.html'" type="submit" class="btn btn-upload">Зарегистрироваться</button>
+							</td>
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+		</form>
+
+	</div>
+
+  </body>
+</html>

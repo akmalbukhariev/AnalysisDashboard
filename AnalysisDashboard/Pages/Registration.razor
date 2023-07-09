@@ -1,0 +1,209 @@
+﻿@page "/registration"
+@*@page "/"*@
+
+@using AnalysisDashboard.Components
+
+<table class="header_table">
+    <thead>
+		<tr> 
+			<td align="left" style="width: 33%;">
+			<table>
+				<thead>
+				<tr> 
+					<td>
+					<img src="images/logo.png" height="40" style="margin-left: 30px;">
+					</td> 
+					<td>
+					<p class="text4">PROJECT NAME</p>
+					</td> 
+				</tr>
+				</thead>
+			</table>
+			</td> 
+			<td align="center" style="width: 34%;"></td> 
+				<td align="right" style="width: 33%;">
+					<table>
+						<thead>
+							<tr>
+								<td>
+									<details class="dropdown _center">
+										<summary role="button">
+										<div class="language">
+											<img src="images/ru.png" width="30px">
+										</div>
+										</summary>
+										<ul>
+										<li>
+											<a href="#">
+											<img src="images/uz.png" width="30px">
+											<label class="language">O'zbekcha</label>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+											<img src="images/uz.png" width="30px">
+											<label class="language">Ўзбекча</label>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+											<img src="images/ru.png" width="30px">
+											<label class="language">Русский</label>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+											<img src="images/en.png" width="30px">
+											<label class="language">English</label>
+											</a>
+										</li>
+										</ul>
+									</details>
+								</td> 
+							<td>
+							<div class="moon">
+								<a onclick="myFunction()">
+								<i class="fa fa-moon-o"></i>
+								</a>
+							</div>
+							</td> 
+							<td>
+							<details class="dropdown _right">
+								<summary role="button">
+								<div class="avatar _header">
+									<img src="images/user.png" />
+								</div>
+								</summary>
+								<ul>
+								<li><a href="login.html">Войти в систему</a></li>
+								</ul>
+							</details>
+							</td>
+						</tr>
+					</thead>
+				</table> 
+			</td>
+		</tr>
+    </thead>
+</table>
+
+<div class="big_container"> 
+	<div class="logo_container">
+		<div>
+			<p class="text5">Регистрация</p>
+		</div>
+		<div>
+			<p class="text6">Нужно войти в систему для использования всех возможностей сервиса</p>
+		</div>
+	</div>
+	<LoadingView Loading="ShowLoading" />
+	<div class="container _user"> 
+		<table style="width: 100%">
+			<thead>
+				<tr><td style="height: 7px;"></td></tr>
+				<tr>
+					<td>
+						<label class="placeinput">
+							<input class="input _default" @bind="Model.FirstName" required="1" type="text">
+							<div class="place_holder">Имя<span> *</span></div>
+						</label>
+					</td>
+				</tr>
+				<tr><td style="height: 7px;"></td></tr>
+				<tr>
+					<td>
+						<input type="text" class="input _default" @bind="Model.LastName" placeholder="Фамилия">
+					</td>
+				</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="placeinput">
+								<input class="input _default" required="1" @bind="Model.Login" type="text">
+								<div class="place_holder">Логин<span> *</span></div>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="placeinput">
+								<input class="input _default" required="1" @bind="Model.Email" type="text">
+								<div class="place_holder">Электронная почта<span> *</span></div>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="placeinput">
+								<input class="input _default" required="1" @bind="Model.PhoneNumber" type="text">
+								<div class="place_holder">Номер телефона (мобильный)<span> *</span></div>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="placeinput">
+								<input class="input _default" required="1" @bind="Model.Password" type="password">
+								<div class="place_holder">Пароль<span> *</span></div>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="placeinput">
+								<input class="input _default" required="1" @bind="RepeatPassword" type="password">
+								<div class="place_holder">Пароль еще раз<span> *</span></div>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<input type="text" class="input _default" @bind="Model.CompanyName" placeholder="Название организации">
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<input type="text" class="input _default" @bind="Model.WebAddress" placeholder="Веб-страница">
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td align="center">
+							<div class="image-upload">
+								<label for="file-input">
+									<div class="avatar _registration _hover">
+										<img src="@SelectedImage">
+										<div class="overlay">
+											<div class="hover_text"><i class="fa fa-download"></i></div>
+										</div>
+									</div>
+								</label> 
+								<InputFile id="file-input" accept=".png,.jpg" multiple="false" OnChange="@FileUploadOnChange"/> 
+							</div> 
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="checkbox">Согласен с <a class="blue" href="#">условиями</a> использования сервисом
+								<input type="checkbox" @bind="Agree">
+								<span class="checkmark"></span>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<button @onclick="ClickLogin" class="btn btn-upload" disabled="@ShowLoading">Зарегистрироваться</button>  
+						</td>
+					</tr>
+				</thead>
+		</table> 
+	</div> 
+</div>  

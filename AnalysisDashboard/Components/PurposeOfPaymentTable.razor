@@ -1,0 +1,132 @@
+﻿ 
+<div class="overlay" style="display: @(Loading ? "block" : "none")">
+	<div style="width: 450px" align="center" class="popup">
+		<h3>Разбивка Chart</h3>
+		<table style="font-size: 14px;" id="myTable" class="fixed_header" align="center">
+			<thead>
+				<tr class="header">
+					<td>Акмал</td>
+					<th>Отабек</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>500 000 Сум</td>
+					<th>200 000 Сум</th>
+				</tr>
+				<tr>
+					<td>200 000 Сум</td>
+					<th>500 000 Сум</th>
+				</tr>
+				<tr>
+					<td>1 000 000 Сум</td>
+					<th>2 000 000 Сум</th>
+				</tr>
+				<tr>
+					<td>2 000 000 Сум</td>
+					<th>1 000 000 Сум</th>
+				</tr>
+				<tr>
+					<td>500 000 Сум</td>
+					<th>200 000 Сум</th>
+				</tr>
+				<tr>
+					<td>200 000 Сум</td>
+					<th>500 000 Сум</th>
+				</tr>
+				<tr>
+					<td>1 000 000 Сум</td>
+					<th>2 000 000 Сум</th>
+				</tr>
+				<tr>
+					<td>2 000 000 Сум</td>
+					<th>1 000 000 Сум</th>
+				</tr>
+			</tbody>
+		</table>
+		<a class="pop-close" href="#">&times;</a>
+	</div>
+</div>
+
+<style> 
+	 
+	.overlay:target {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.popup {
+		margin: 15% auto;
+		padding: 20px;
+		background: #fff;
+		border-radius: 10px;
+		width: 300px;
+		position: relative;
+		transition: all 5s ease-in-out;
+	}
+
+	.pop-close {
+		position: absolute;
+		top: 0px;
+		right: 10px;
+		font-size: 30px;
+		font-weight: bold;
+		text-decoration: none;
+		color: #333;
+	}
+
+	.pop-close:hover {
+		color: red;
+	}
+
+	#myTable {
+		width: 448px;
+		font-size: 16px;
+		font-weight: bold;
+		border-collapse: collapse;
+	}
+
+	#myTable th, #myTable td {
+		padding: 8px;
+		border: 1px solid #ddd;
+		word-break: keep-all;
+		font-weight: normal;
+	}
+
+	#myTable tr.header {
+		background-color: #f1f1f1;
+		font-size: 17px;
+		width: 433px;
+	}
+
+	#myTable tr:hover {
+		background-color: #f1f1f1;
+	}
+
+	.fixed_header tbody {
+	display: block;
+	overflow: auto;
+	height: 205px;
+	}
+
+	.fixed_header thead tr {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	}
+
+	.fixed_header th {
+	width: 249px;
+	}
+
+	.fixed_header td {
+	text-align: center;
+	width: 149px;
+	}
+ 
+</style>
+
+@code {
+    [Parameter]
+    public bool Loading { get; set; }
+}

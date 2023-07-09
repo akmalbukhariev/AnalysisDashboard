@@ -1,0 +1,101 @@
+
+/* KNOPKASI */
+.dropdown {
+  position: relative;
+  margin-right: 30px;
+}
+
+.dropdown summary {
+  list-style: none;
+  list-style-type: none;
+}
+
+.dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+
+/* очиладиган ойнаси */
+.dropdown ul {
+  position: absolute;
+  padding: 14px 0;
+  box-sizing: border-box;
+  z-index: 2;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 6px;
+  list-style: none;
+  font-size: 14px;
+}
+
+.dropdown ul li a:link, .dropdown ul li a:visited {
+  display: inline-block;
+  padding: 10px 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  color: #343A40;
+  text-decoration: none;
+}
+
+.dropdown ul li a:hover {
+  background-color: #E9ECEF;
+  color: #10451D;
+}
+
+/* UCHBURCHAK */
+.dropdown ul::before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -10px;
+  margin-left: -10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #fff transparent;
+}
+
+/* Close the dropdown with outside clicks */
+.dropdown > summary::before {
+
+}
+
+.dropdown[open] > summary::before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Ўнг томонида */
+._right ul::before {
+  left: 110px;
+}
+
+._right ul {
+  margin: 20px 0 0 0;
+  width: 140px;
+  left: -19px;
+  margin-left: calc((140px / 2)  * -1);
+}
+
+/* Ўртада */
+._center ul::before {
+  left: 70px;
+}
+
+._center ul {
+  margin: 14px 0 0 0;
+  width: 140px;
+  left: 15px;
+  margin-left: calc((140px / 2)  * -1);
+}

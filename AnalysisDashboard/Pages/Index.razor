@@ -1,0 +1,117 @@
+﻿@page "/"
+
+@inherits IndexBase 
+@using AnalysisDashboard.Components
+
+<table class="header_table">
+    <thead>
+        <tr>
+            <td align="left" style="width: 33%;"> </td>
+            <td align="center" style="width: 34%;"></td>
+            <td align="right" style="width: 33%;">
+                <table>
+                    <thead>
+                    <tr>
+                        <td>
+                        <details class="dropdown _center">
+                            <summary role="button">
+                            <div class="language">
+                                <img src="images/ru.png" width="30">
+                            </div>
+                            </summary>
+                            <ul>
+                            <li>
+                                <a href="#">
+                                <img src="images/uz.png" width="30">
+                                <label class="language">O'zbekcha</label>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <img src="images/uz.png" width="30">
+                                <label class="language">Ўзбекча</label>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <img src="images/ru.png" width="30">
+                                <label class="language">Русский</label>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <img src="images/en.png" width="30">
+                                <label class="language">English</label>
+                                </a>
+                            </li>
+                            </ul>
+                        </details>
+                        </td> 
+                        <td>
+                        <div class="moon">
+                            <a onclick="myFunction()">
+                            <i class="fa fa-moon-o"></i>
+                            </a>
+                        </div>
+                        </td> 
+                        <td>
+                        <details class="dropdown _right">
+                            <summary role="button">
+                            <div class="avatar _header">
+                                <img src="images/user.png" />
+                            </div>
+                            </summary>
+                            <ul>
+                            <li><a href="/login">Войти в систему</a></li>
+                            </ul>
+                        </details>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>       
+            </td>
+        </tr>
+    </thead>
+</table>
+
+<div class="big_container"> 
+    <LoadingView Loading="ShowLoading"/> 
+    <div class="logo_container">
+        <div class="logo_text">
+            <img src="images/logo.png" width="100">
+        </div>
+        <div class="logo_text">
+            <h2>PROJECT NAME</h2>
+        </div>
+    </div> 
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="container _dropdown">
+            <div class="form-group">
+            <p class="text1">
+                Чтобы анализировать информацию, нужно загрузить файлы Excel
+            </p>
+            <div class="dropzone-wrapper">
+                <div class="dropzone-desc">
+                <img src="images/excel2.png" width="90" height="90">
+                <p class="text2">Перетащите файл сюда</p>
+                <p class="text3">или нажмите на кнупку</p>
+                <input type="button" class="btn btn-choise" value="Выбрать файл">
+                </div>  
+                <InputFile type="file" name="img_logo" class="dropzone" accept=".xlsx" multiple="false" OnChange="@FileUploadOnChange"/> 
+            </div> 
+            <div class="line_or">
+                <span>или</span>
+            </div> 
+            <input type="url" class="input _url" placeholder="Введите ссылку на файл"> 
+            <div class="preview-zone hidden">
+                <div class="box">
+                <div class="box-body"></div>
+                </div>
+            </div>
+            </div> 
+            <div>
+            <button type="submit" class="btn btn-upload">Загрузить</button>
+            </div> 
+        </div>
+    </form> 
+</div> 

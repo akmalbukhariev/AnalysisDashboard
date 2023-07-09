@@ -1,0 +1,141 @@
+﻿@page "/general"
+@*@page "/"*@
+
+@inherits GeneralBase
+@using AnalysisDashboard.Components
+
+ <div class="big_container">  
+	@* <PurposeOfPaymentTable Loading=ShowLoading/>*@
+	 
+	<div class="content"> 
+		<table style="width: 100%;">
+			<thead>
+				<tr>
+					<td class="gen_td" style="width: 40%; min-width: 500px; height: 400px; padding: 10px;"> 
+						<table style="width: 100%;" class="tab_pie">
+							<thead>
+								<tr>
+									<td align="center" style="font-size: 16px; font-weight: bold; color: #343A40;">
+										Расход
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div id="chartContainer1" style="height: 400px; width: 100%; display: inline-block;"></div>
+										<button align="right" class="btn invisible1" id="backButton1"><i class="fa fa-chevron-circle-left"></i></button>
+									</td>
+								</tr>
+							</thead>
+						</table> 
+					</td>
+					<td class="int_vertical"></td>
+					<td class="gen_td" style="width: 40%; min-width: 500px; height: 450px; padding: 10px;"> 
+						<table style="width: 100%;" class="tab_pie">
+							<thead>
+								<tr>
+									<td align="center" style="font-size: 16px; font-weight: bold; color: #343A40;">
+										Прибыль
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div id="chartContainer2" style="height: 400px; width: 100%; display: inline-block;"></div>
+										<button class="btn invisible2" id="backButton2"><i class="fa fa-chevron-circle-left"></i></button>
+									</td>
+								</tr>
+							</thead>
+						</table> 
+					</td>
+					<td class="int_vertical"></td>
+					<td class="gen_td" style="width: 20%; min-width: 200px; vertical-align: top;">
+						<table class="tab_third">
+							<thead>
+								<tr>
+									<td align="center" style="font-size: 16px; font-weight: bold; padding: 5px 0 15px 0; color: #343A40;">
+										Баланс
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="tab_third_1 apricot1">
+										Баланс в начале периода
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="tab_third_2 apricot2">
+										@BalanceAtTheBeginningOfThePeriod Сум
+									</td>
+								</tr>
+								<tr class="int_horizontal"><td></td></tr>
+								<tr>
+									<td align="center" class="tab_third_1 dirty1">
+										Расход за период
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="tab_third_2 dirty2">
+										@FxpenseForThePeriod Сум
+									</td>
+								</tr>
+								<tr class="int_horizontal"><td></td></tr>
+								<tr>
+									<td align="center" class="tab_third_1 peach1">
+										Поступление за период
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="tab_third_2 peach2">
+										@FceiptForThePeriod Сум
+									</td>
+								</tr>
+								<tr class="int_horizontal"><td></td></tr>
+								<tr>
+									<td align="center" class="tab_third_1 broccoli1">
+										БАЛАНС НА КОНЕЦ ПЕРИОДА
+									</td>
+								</tr>
+								<tr>
+									<td align="center" class="tab_third_2 broccoli2">
+										@BalanceAtTheEndOfThePeriod Сум
+									</td>
+								</tr>
+							</thead>
+						</table>
+					</td>
+				</tr>
+				<tr class="int_horizontal"><td></td></tr>
+				<tr class="int_horizontal"><td></td></tr>
+				<tr> 
+					<td class="gen_td" colspan="6" style="width: 100%; min-width: 500px; padding: 15px 30px 30px 30px;">
+						<table style="width: 100%;" class="tab_pie">
+							<thead>
+								<tr>
+									<td align="center" colspan="2" style="font-size: 16px; font-weight: bold; color: #343A40;">
+										Динамика поступлений и расходов
+									</td>
+								</tr>
+								<tr>
+									<td align="left" style="padding: 0px 0px 20px 30px;">
+										<button class="btn _circle" @onclick="ClickBack"><i class="fa fa-angle-double-left"></i></button>
+										<button class="btn _circle" @onclick="ClickForward"><i class="fa fa-angle-double-right"></i></button>
+									</td>
+									<td align="right" style="padding-bottom: 20px; font-size: 14px; font-weight: bold;">
+										<a class="blue" href="" @onclick="ClickedMonth" @onclick:preventDefault style=@ClickedMonthStyle>Месяц</a>
+										|
+										<a class="gray" href="" @onclick="ClickedWeek" @onclick:preventDefault style=@ClickedWeekStyle>Неделя</a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<div id="chartContainer3" style="height: 400px; width: 100%;"></div>
+									</td>
+								</tr>
+							</thead>
+						</table>
+					</td> 
+				</tr>
+				<tr class="int_horizontal"><td></td></tr>
+				<tr class="int_horizontal"><td></td></tr>
+			</thead>
+		</table> 
+	</div>
+</div> 

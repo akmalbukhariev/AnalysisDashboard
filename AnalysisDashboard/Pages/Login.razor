@@ -1,0 +1,174 @@
+﻿@page "/login"
+
+@inherits LoginBase  
+
+<table class="header_table">
+    <thead>
+        <tr> 
+            <td align="left" style="width: 33%;">
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <img src="images/logo.png" height="40" style="margin-left: 30px;">
+                        </td>
+                        <td>
+                            <p class="text4">PROJECT NAME</p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            </td>
+            <td align="center" style="width: 34%;"></td>
+                <td align="right" style="width: 33%;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>
+                            <details class="dropdown _center">
+                                <summary role="button">
+                                <div class="language">
+                                    <img src="images/ru.png" width="30">
+                                </div>
+                                </summary>
+                                <ul>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/uz.png" width="30">
+                                    <label class="language">O'zbekcha</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/uz.png" width="30">
+                                    <label class="language">Ўзбекча</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/ru.png" width="30">
+                                    <label class="language">Русский</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/en.png" width="30">
+                                    <label class="language">English</label>
+                                    </a>
+                                </li>
+                                </ul>
+                            </details>
+                            </td>
+
+                            <td>
+                            <div class="moon">
+                                <a onclick="myFunction()">
+                                <i class="fa fa-moon-o"></i>
+                                </a>
+                            </div>
+                            </td>
+
+                            <td>
+                            <details class="dropdown _right">
+                                <summary role="button">
+                                <div class="avatar _header">
+                                    <img src="images/user.png" />
+                                </div>
+                                </summary>
+                                <ul>
+                                <li><a href="login.html">Войти в систему</a></li>
+                                </ul>
+                            </details>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table> 
+                </td>
+        </tr>
+    </thead>
+</table>
+
+<div class="big_container">
+	<div class="logo_container">
+		<div>
+			<p class="text5">Войти в систему</p>
+		</div>
+		<div>
+			<p class="text6">Нужно войти в систему для использования всех возможностей сервиса</p>
+		</div>
+	</div>
+	<div class="container _user">
+		<table style="width: 100%">
+			<thead>
+				<tr><td style="height: 7px;"></td></tr>
+				<tr>
+					<td align="center">
+						<div class="avatar _login">
+							<img src="images/user.png" />
+						</div>
+					</td>
+				</tr>
+				<tr><td style="height: 30px;"></td></tr>
+				<form action="" method="POST" enctype="multipart/form-data">
+					<tr>
+						<td>
+							<input type="text" class="input _default" placeholder="Логин">
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<input type="password" class="input _default" placeholder="Пароль">
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<label class="checkbox">Запомнить меня 
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<button type="submit" class="btn btn-upload">Войти</button>
+						</td>
+					</tr>
+					<tr><td style="height: 7px;"></td></tr>
+					<tr>
+						<td>
+							<a style="margin-left: 15px;" class="blue" href="#">Забыли пароль?</a>
+						</td>
+					</tr>
+				</form>
+				<tr><td style="height: 7px;"></td></tr>
+				<tr>
+					<td>
+						<button onclick="location.href='/registration'" type="submit" class="btn _bluehole">Если нет аккаунта, зарегистрируйтесь</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="line_or">
+							<span>или</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" class="btn _google"><i style="position: relative; left: -120px;" class="fa fa-google"></i>Войти с помощью Google</button>
+					</td>
+				</tr>
+				<tr><td style="height: 7px;"></td></tr>
+				<tr>
+					<td>
+						<button type="submit" class="btn _facebook"><i style="position: relative; left: -110px;" class="fa fa-facebook"></i>Войти с помощью Facebook</button>
+					</td>
+				</tr>
+			</thead>
+		</table> 
+	</div> 
+</div>
+ 
