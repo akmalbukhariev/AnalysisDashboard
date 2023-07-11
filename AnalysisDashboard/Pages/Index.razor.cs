@@ -18,7 +18,10 @@ namespace AnalysisDashboard.Pages
         [Inject]
         public DataInfo dataInfo { get; set; }
         public IndexBase()
-        {  
+        {
+            //string sss = "";// "00668~За перевод электронных";
+            //sss = sss.Substring(0, 5);
+
             dataInfo = new DataInfo();
         }
 
@@ -151,7 +154,15 @@ namespace AnalysisDashboard.Pages
                     case 4: item.Mfo = row.GetCell(i).ToString(); break;
                     case 5: item.Debit = Convert.ToDouble(row.GetCell(i).ToString().Replace(",","")); break;
                     case 6: item.Credit = Convert.ToDouble(row.GetCell(i).ToString().Replace(",", "")); break;
-                    case 7: item.PurposeOfPayment = row.GetCell(i).ToString(); break;
+                    case 7:
+                        {
+                            item.PurposeOfPayment = row.GetCell(i).ToString();
+                            if (item.PurposeOfPayment.Length >= 6)
+                            {
+                                item.Code = item.PurposeOfPayment.Substring(0, 5);
+                            }
+                        }
+                        break;
                 }
             }
 

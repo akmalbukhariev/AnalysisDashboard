@@ -314,14 +314,35 @@ function GenerateChart() {
 
 }
 
+var debitBarList = new Array();
+var creditBarList = new Array();
+
 var debitList = new Array();
 var creditList = new Array();
+
+function addDebitBar(info) {
+	debitBarList.push({ y: info.amount, name: info.name, indexLabel: "{name}", color: info.color, cursor: "pointer", code: info.code });
+}
+function addBarCredit(info) {
+	creditBarList.push({ y: info.amount, name: info.name, indexLabel: "{name}", color: info.color, cursor: "pointer", code: info.code });
+}
 
 function addDebit(info) {
 	debitList.push({ x: new Date(info.year, info.month - 1, info.day), y: info.amount }); 
 }
 function addCredit(info) {
 	creditList.push({ x: new Date(info.year, info.month - 1, info.day), y: info.amount });
+}
+
+function cleanDebitBarList() {
+	while (debitBarList.length > 0) {
+		debitBarList.pop();
+	}
+}
+function cleanCreditBarList() {
+	while (creditBarList.length > 0) {
+		creditBarList.pop();
+	}
 }
 
 function cleanDebitList() {
@@ -335,9 +356,11 @@ function cleanCreditList() {
 	}
 }
 
-function Chart_1() {
+function Chart_1(sumDebit) {
+	 
 	var visitorsData1 = {
 		"Rasxod1": [{ 
+			click: DrillDown1,
 			explodeOnClick: false,
 			innerRadius: "50%",
 			radius: "90%",
@@ -347,20 +370,10 @@ function Chart_1() {
 			indexLabel: "#percent%",
 			percentFormatString: "#0.##",
 			toolTipContent: "{y} (#percent%)",
-			dataPoints: [
-				{ y: 100000.05, name: "Комиссия банка", indexLabel: "{name}", color: "#33a8c7", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Налоги за период", indexLabel: "{name}", color: "#52e3e1", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Корпоративная карта", indexLabel: "{name}", color: "#a0e426", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Месячная заработная плата", indexLabel: "{name}", color: "#fdf148", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Покупка услуг", indexLabel: "{name}", color: "#ffab00", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Покупка основных средств", indexLabel: "{name}", color: "#f77976", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Финансовые займы", indexLabel: "{name}", color: "#f050ae", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Выплата кредита", indexLabel: "{name}", color: "#d883ff", cursor: "pointer", click: DrillDown1 },
-				{ y: 100000.05, name: "Коммунальные расходы", indexLabel: "{name}", color: "#9336fd", cursor: "pointer", click: DrillDown1 }
-			]
+			dataPoints: debitBarList
 		}] 
 	};
-
+	 
 	var Options1 = {
 		animationEnabled: true, 
 		title: {
@@ -370,7 +383,7 @@ function Chart_1() {
 			fontWeight: "bold",
 			horizontalAlign: "center",
 			verticalAlign: "center",
-			text: "100 000 Сум"
+			text: sumDebit
 		},
 		legend: {
 			fontFamily: "'Roboto', sans-serif",
@@ -384,14 +397,14 @@ function Chart_1() {
 	chart1.render();
 
 	function DrillDown1(e) { 
-		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_1", e.dataPoint.name); 
+		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_1", e.dataPoint.code); 
 	} 
 }
 
-function Chart_2() {
+function Chart_2(sumDebit) {
 	var visitorsData2 = {
 		"Prixod2": [{
-
+			click: DrillDown2,
 			explodeOnClick: false,
 			innerRadius: "50%",
 			radius: "90%",
@@ -401,41 +414,7 @@ function Chart_2() {
 			indexLabel: "#percent%",
 			percentFormatString: "#0.##",
 			toolTipContent: "{y} (#percent%)",
-			dataPoints: [
-				{ y: 100000.05, name: "Терминал UzCard", indexLabel: "{name}", color: "#f94144" },
-				{ y: 100000.05, name: "Терминал Humo", indexLabel: "{name}", color: "#f3722c" },
-				{ y: 100000.05, name: "Наличные (пополнение)", indexLabel: "{name}", color: "#f8961e" },
-				{ y: 100000.05, name: "Поступления через платежные приложения", indexLabel: "{name}", color: "#f9844a", cursor: "pointer", click: DrillDown2 },
-				{ y: 100000.05, name: "Переводы на счет (от партнеров или источников)", indexLabel: "{name}", color: "#f9c74f", cursor: "pointer", click: DrillDown2 },
-				{ y: 100000.05, name: "Кэшбеки", indexLabel: "{name}", color: "#90be6d" },
-				{ y: 100000.05, name: "Проценты с депозитов", indexLabel: "{name}", color: "#43aa8b" },
-				{ y: 100000.05, name: "Возврат финзаймов", indexLabel: "{name}", color: "#4d908e" },
-				{ y: 100000.05, name: "Прочие поступления", indexLabel: "{name}", color: "#577590" }
-			]
-		}],
-		"Поступления через платежные приложения": [{
-			color: "#f9844a",
-			type: "column",
-			yValueFormatString: "# ### ##0.## сум",
-			dataPoints: [
-				{ label: "Click", indexLabel: "{y}", y: 123450.15 },
-				{ label: "Payme", indexLabel: "{y}", y: 12400.23 },
-				{ label: "Uzum", indexLabel: "{y}", y: 107100.03 },
-				{ label: "Paylov", indexLabel: "{y}", y: 92400.23 }
-			]
-		}],
-		"Переводы на счет (от партнеров или источников)": [{
-			color: "#f9c74f",
-			type: "column",
-			yValueFormatString: "# ### ##0.## сум",
-			dataPoints: [
-				{ label: "01.01.2023", indexLabel: "{y}", y: 45015000 },
-				{ label: "02.02.2023", indexLabel: "{y}", y: 35005000 },
-				{ label: "03.03.2023", indexLabel: "{y}", y: 38005000 },
-				{ label: "04.04.2023", indexLabel: "{y}", y: 39005000 },
-				{ label: "05.05.2023", indexLabel: "{y}", y: 37005000 },
-				{ label: "06.06.2023", indexLabel: "{y}", y: 40023000 }
-			]
+			dataPoints: creditBarList
 		}]
 	};
 
@@ -448,7 +427,7 @@ function Chart_2() {
 			fontWeight: "bold",
 			horizontalAlign: "center",
 			verticalAlign: "center",
-			text: "50 000 000 Сум"
+			text: sumDebit
 		},
 		legend: {
 			fontFamily: "'Roboto', sans-serif",
@@ -462,7 +441,7 @@ function Chart_2() {
 	chart2.render();
 
 	function DrillDown2(e) {
-		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_2", e.dataPoint.name);
+		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_2", e.dataPoint.code);
 	} 
 }
 

@@ -1,5 +1,5 @@
 ﻿ 
-<div class="overlay" style="display: @(Loading ? "block" : "none")">
+<div class="overlay" style="display: @(ShowTable ? "block" : "none")">
 	<div style="width: 450px" align="center" class="popup">
 		<h3>Разбивка Chart</h3>
 		<table style="font-size: 14px;" id="myTable" class="fixed_header" align="center">
@@ -128,5 +128,5 @@
 
 @code {
     [Parameter]
-    public bool Loading { get; set; }
+    public bool ShowTable { get; set; }
 }

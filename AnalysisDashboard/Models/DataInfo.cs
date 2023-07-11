@@ -42,7 +42,9 @@
         public string Mfo { get; set; } = "";
         public double Debit { get; set; } = 0.0;
         public double Credit { get; set; } = 0.0;
-        public string PurposeOfPayment { get; set; } = ""; 
+        public string PurposeOfPayment { get; set; } = "";
+        public string Code { get; set; } = "";
+        public string NameOfCode { get; set; } = "";
 
         public void Copy(DataItem other)
         {
@@ -54,6 +56,8 @@
             Debit = other.Debit;
             Credit = other.Credit;
             PurposeOfPayment = other.PurposeOfPayment; 
+            Code = other.Code;
+            NameOfCode = other.NameOfCode;
         }
     }
 

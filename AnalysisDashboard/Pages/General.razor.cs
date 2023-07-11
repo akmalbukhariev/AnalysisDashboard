@@ -35,7 +35,7 @@ namespace AnalysisDashboard.Pages
         public string ClickedWeekStyle { get; set; } = "";
 
         [Parameter]
-        public bool ShowTable { get; set; } = false;
+        public static bool ShowTable { get; set; } = false;
 
         string ClickedStyle = "text-decoration: underline solid #0077b6 2px;";
         public GeneralBase()
@@ -58,23 +58,91 @@ namespace AnalysisDashboard.Pages
         {
             if (firstRender)
             {
-                await SortByMonth(0);
-                await jsruntime.InvokeVoidAsync("Chart_1");
-                await jsruntime.InvokeVoidAsync("Chart_2");
-                StateHasChanged();
+                foreach (string code in CodeTable.Instance.table.Keys)
+                {
+                    var grouppedSearchCodeList = dataInfo.Data.GroupBy(item => item.Code.Equals(code)).ToList();
+                    foreach (var group in grouppedSearchCodeList)
+                    {
+                        if (group.Key)
+                        {
+                            foreach (var item in group)
+                            {
+                                item.NameOfCode = CodeTable.Instance.GetData(code).Trim();
+                            }
+                        }
+                    }
+                }
+
+                await DebitBar();
+                await CreditBar();
+                await SortByMonth(0); 
             } 
+        }
+
+        async Task DebitBar()
+        { 
+            var grouppedCodeList = dataInfo.Data.GroupBy(item => item.Code).ToList();
+            List<(string, double)> sumDebitList = new List<(string, double)>();
+
+            double sumDebit = 0;
+            foreach (var group in grouppedCodeList)
+            {
+                sumDebitList.Add((group.Key, group.Sum(item => item.Debit)));
+            }
+
+            foreach (var sumItem in sumDebitList)
+            {
+                BarChartInfo newItem = new BarChartInfo();
+                newItem.Code = sumItem.Item1;
+                newItem.Amount = sumItem.Item2;
+                newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
+                newItem.Color = getRandColor();
+
+                await jsruntime.InvokeVoidAsync("addDebitBar", newItem);
+            }
+
+            sumDebit = sumDebitList.Sum(item => item.Item2);
+            string strSum = double.Parse(String.Format("{0:0.00}", sumDebit)).ToString("#,##0.########");
+            await jsruntime.InvokeVoidAsync("Chart_1", strSum + " Сум");
+        }
+
+        async Task CreditBar()
+        {
+            var grouppedCodeList = dataInfo.Data.GroupBy(item => item.Code).ToList();
+            List<(string, double)> sumCreditList = new List<(string, double)>();
+
+            double sumCredit = 0;
+            foreach (var group in grouppedCodeList)
+            {
+                sumCreditList.Add((group.Key, group.Sum(item => item.Credit)));
+            }
+
+            foreach (var sumItem in sumCreditList)
+            {
+                BarChartInfo newItem = new BarChartInfo();
+                newItem.Code = sumItem.Item1;
+                newItem.Amount = sumItem.Item2;
+                newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
+                newItem.Color = getRandColor();
+
+                await jsruntime.InvokeVoidAsync("addBarCredit", newItem);
+            }
+
+            sumCredit = sumCreditList.Sum(item => item.Item2);
+            string strSum = double.Parse(String.Format("{0:0.00}", sumCredit)).ToString("#,##0.########");
+            await jsruntime.InvokeVoidAsync("Chart_2", strSum + " Сум");
         }
 
         [JSInvokable]
         public static void ClickChart_1(string barId)
-        { 
-
+        {
+            ShowTable = true;
         }
 
         [JSInvokable]
         public static void ClickChart_2(string barId)
         {
-
+            ShowTable = true;
         }
 
         int forward = 0;
@@ -132,19 +200,7 @@ namespace AnalysisDashboard.Pages
         {
             await jsruntime.InvokeVoidAsync("cleanDebitList");
             await jsruntime.InvokeVoidAsync("cleanCreditList");
-
-            /*======================================For Chart 1===========================================================*/
-            foreach (string cod in CodeTable.Instance.table.Keys)
-            {
-                var grouppedCodeList = (from item in dataInfo.Data select (item.Date, item.Debit, item.PurposeOfPayment))
-                    .GroupBy(group => group.PurposeOfPayment.Contains(cod)).ToList();
-
-                //var grouppedMonthDebit = (from item in grouppedCodeList[0] select(item.))
-                  
-                //var grouppedDebitMonthList = (from item in grouppedCodeList select(item.Da)) 
-            }
-
-            /*======================================For Chart 3===========================================================*/
+              
             var debitList3 = (from item in dataInfo.Data select (item.Date, item.Debit)).GroupBy(item => item.Date.Month).ToList();
             var creditList3 = (from item in dataInfo.Data select (item.Date, item.Credit)).GroupBy(item => item.Date.Month).ToList();
 
@@ -246,6 +302,15 @@ namespace AnalysisDashboard.Pages
             }
 
             await jsruntime.InvokeVoidAsync("Chart_3");
+        }
+
+        private string getRandColor()
+        {
+            Random rnd = new Random();
+            string hexOutput = String.Format("{0:X}", rnd.Next(0, 0xFFFFFF));
+            while (hexOutput.Length < 6)
+                hexOutput = "0" + hexOutput;
+            return "#" + hexOutput;
         }
     }
 }
