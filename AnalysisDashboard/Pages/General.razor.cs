@@ -18,6 +18,7 @@ namespace AnalysisDashboard.Pages
 
         [Inject]
         public DataInfo dataInfo { get; set; }
+        //public static DataInfo tempDataInfo { get; set; }
 
         [Parameter]
         public string BalanceAtTheBeginningOfThePeriod { get; set; }
@@ -35,16 +36,25 @@ namespace AnalysisDashboard.Pages
         public string ClickedWeekStyle { get; set; } = "";
 
         [Parameter]
-        public static bool ShowTable { get; set; } = false;
+        public bool ShowTable { get; set; } = false;
 
         string ClickedStyle = "text-decoration: underline solid #0077b6 2px;";
+        
+        [Parameter]
+        public List<BarChartItemInfo> BarChartItemInfoList { get; set; }
+
+        //private DotNetObjectReference<General>? objRef;
         public GeneralBase()
-        {
+        { 
+            BarChartItemInfoList = new List<BarChartItemInfo>();
             ClickedMonthStyle = ClickedStyle;
         }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
+            var dotNetReference = DotNetObjectReference.Create(this);
+            await jsruntime.InvokeVoidAsync("setObjReference", dotNetReference);
+
             if (dataInfo != null && dataInfo.Header != null)
             {
                 BalanceAtTheBeginningOfThePeriod = dataInfo.Header.BalanceAtTheBeginningOfPeriod.ToString("#,##0.########");
@@ -57,7 +67,7 @@ namespace AnalysisDashboard.Pages
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-            {
+            { 
                 foreach (string code in CodeTable.Instance.table.Keys)
                 {
                     var grouppedSearchCodeList = dataInfo.Data.GroupBy(item => item.Code.Equals(code)).ToList();
@@ -77,6 +87,11 @@ namespace AnalysisDashboard.Pages
                 await CreditBar();
                 await SortByMonth(0); 
             } 
+        }
+
+        public void CloseTableInfo()
+        {
+            ShowTable = false;
         }
 
         async Task DebitBar()
@@ -134,20 +149,31 @@ namespace AnalysisDashboard.Pages
         }
 
         [JSInvokable]
-        public static void ClickChart_1(string barId)
-        {
-            ShowTable = true;
-        }
+        public void ClickBarChart(string barId)
+        { 
+            BarChartItemInfoList.Clear();
+            var grouppedCodeList = dataInfo.Data.GroupBy(item => item.Code).ToList().Where(group => group.Key.Equals(barId)).ToList();
 
-        [JSInvokable]
-        public static void ClickChart_2(string barId)
-        {
-            ShowTable = true;
-        }
+            if (grouppedCodeList.Count > 0)
+            {
+                foreach (var group in grouppedCodeList[0])
+                {
+                    BarChartItemInfo newItem = new BarChartItemInfo();
+                    newItem.Date = group.Date.ToString("dd.MM.yyyy");
+                    newItem.Sum = group.Debit.ToString("#,##0.########");
+                    newItem.PurposeOfPayment = group.PurposeOfPayment;
 
+                    BarChartItemInfoList.Add(newItem);
+                }
+            }
+
+            ShowTable = true;
+            StateHasChanged(); 
+        }
+         
         int forward = 0;
         public async void ClickForward()
-        {
+        { 
             forward++;
             if (clickedMonth)
             {

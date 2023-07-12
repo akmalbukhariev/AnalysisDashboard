@@ -4,9 +4,32 @@
 @inherits GeneralBase
 @using AnalysisDashboard.Components
 
- <div class="big_container">  
-	 @*<PurposeOfPaymentTable ShowTable=ShowTable/>*@
-	  
+ <div class="big_container">   
+	<div class="tableOverlay" style="display: @(ShowTable ? "block" : "none")">
+		<div style="width: 450px" align="center" class="popup">
+			<h3>Разбивка Chart</h3>
+			<table style="font-size: 14px;" id="myTable" class="fixed_header" align="center">
+				<thead>
+					<tr class="header">
+						<td>Дата платежа</td>
+						<td>Сумма</td>
+						<th>Назначение платежа</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var item in BarChartItemInfoList)
+					{
+						<tr>
+							<td>@item.Date</td>
+							<td>@item.Sum Сум</td>
+							<th>@item.PurposeOfPayment</th>
+						</tr>  
+					}
+				</tbody>
+			</table>
+			<a class="pop-close" href="" @onclick="CloseTableInfo" @onclick:preventDefault>&times;</a>
+	</div>
+</div> 
 	<div class="content"> 
 		<table style="width: 100%;">
 			<thead>

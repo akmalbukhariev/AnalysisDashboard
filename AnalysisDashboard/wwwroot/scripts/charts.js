@@ -356,6 +356,11 @@ function cleanCreditList() {
 	}
 }
 
+var DotNetHelper;
+function setObjReference(dotNetHelper) {
+	DotNetHelper = dotNetHelper;
+};
+
 function Chart_1(sumDebit) {
 	 
 	var visitorsData1 = {
@@ -395,9 +400,9 @@ function Chart_1(sumDebit) {
 	var chart1 = new CanvasJS.Chart("chartContainer1", Options1);
 	chart1.options.data = visitorsData1["Rasxod1"];
 	chart1.render();
-
+	 
 	function DrillDown1(e) { 
-		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_1", e.dataPoint.code); 
+		DotNetHelper.invokeMethodAsync('ClickBarChart', e.dataPoint.code); 
 	} 
 }
 
@@ -441,7 +446,7 @@ function Chart_2(sumDebit) {
 	chart2.render();
 
 	function DrillDown2(e) {
-		DotNet.invokeMethodAsync("AnalysisDashboard", "ClickChart_2", e.dataPoint.code);
+		DotNetHelper.invokeMethodAsync('ClickBarChart', e.dataPoint.code); 
 	} 
 }
 
