@@ -402,7 +402,7 @@ function Chart_1(sumDebit) {
 	chart1.render();
 	 
 	function DrillDown1(e) { 
-		DotNetHelper.invokeMethodAsync('ClickBarChart', e.dataPoint.code); 
+		DotNetHelper.invokeMethodAsync('ClickBarChart1', e.dataPoint.code); 
 	} 
 }
 
@@ -446,7 +446,7 @@ function Chart_2(sumDebit) {
 	chart2.render();
 
 	function DrillDown2(e) {
-		DotNetHelper.invokeMethodAsync('ClickBarChart', e.dataPoint.code); 
+		DotNetHelper.invokeMethodAsync('ClickBarChart2', e.dataPoint.code); 
 	} 
 }
 

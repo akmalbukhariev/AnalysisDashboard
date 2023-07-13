@@ -6,23 +6,23 @@
 
  <div class="big_container">   
 	<div class="tableOverlay" style="display: @(ShowTable ? "block" : "none")">
-		<div style="width: 450px" align="center" class="popup">
+		<div style="width: 750px" align="center" class="popup">
 			<h3>Разбивка Chart</h3>
 			<table style="font-size: 14px;" id="myTable" class="fixed_header" align="center">
 				<thead>
 					<tr class="header">
-						<td>Дата платежа</td>
-						<td>Сумма</td>
-						<th>Назначение платежа</th>
+						<td class="td1">Дата платежа</td>
+						<td class="td2">Сумма</td>
+						<td class="td3">Назначение платежа</td>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach(var item in BarChartItemInfoList)
 					{
 						<tr>
-							<td>@item.Date</td>
-							<td>@item.Sum Сум</td>
-							<th>@item.PurposeOfPayment</th>
+							<td class="td1">@item.Date</td>
+							<td class="td2">@item.Sum Сум</td>
+							<td class="td3">@item.PurposeOfPayment</td>
 						</tr>  
 					}
 				</tbody>
@@ -142,9 +142,9 @@
 										<button class="btn _circle" @onclick="ClickForward"><i class="fa fa-angle-double-right"></i></button>
 									</td>
 									<td align="right" style="padding-bottom: 20px; font-size: 14px; font-weight: bold;">
-										<a class="blue" href="" @onclick="ClickedMonth" @onclick:preventDefault style=@ClickedMonthStyle>Месяц</a>
+										<a href="" @onclick="ClickedMonth" @onclick:preventDefault style=@ClickedMonthStyle>Месяц</a>
 										|
-										<a class="gray" href="" @onclick="ClickedWeek" @onclick:preventDefault style=@ClickedWeekStyle>Неделя</a>
+										<a href="" @onclick="ClickedWeek" @onclick:preventDefault style=@ClickedWeekStyle>Неделя</a>
 									</td>
 								</tr>
 								<tr>

@@ -13,19 +13,21 @@ namespace AnalysisDashboard.Pages
         [Inject]
         IJSRuntime jsruntime { get; set; }
 
-        [Inject]
-        ProtectedSessionStorage ProtectedSessionStore { get; set; }
+        //[Inject]
+        //ProtectedSessionStorage ProtectedSessionStore { get; set; }
 
         [Inject]
-        public DataInfo dataInfo { get; set; }
-        //public static DataInfo tempDataInfo { get; set; }
+        public DataInfo dataInfo { get; set; } 
 
         [Parameter]
         public string BalanceAtTheBeginningOfThePeriod { get; set; }
+
         [Parameter]
         public string FxpenseForThePeriod { get; set; }
+
         [Parameter]
         public string FceiptForThePeriod { get; set; }
+
         [Parameter]
         public string BalanceAtTheEndOfThePeriod { get; set; }
 
@@ -42,12 +44,12 @@ namespace AnalysisDashboard.Pages
         
         [Parameter]
         public List<BarChartItemInfo> BarChartItemInfoList { get; set; }
-
-        //private DotNetObjectReference<General>? objRef;
+         
         public GeneralBase()
         { 
             BarChartItemInfoList = new List<BarChartItemInfo>();
-            ClickedMonthStyle = ClickedStyle;
+            ClickedMonthStyle = ClickedStyle + "color: blue;";
+            ClickedWeekStyle = "color: gray;";
         }
 
         protected override async void OnInitialized()
@@ -149,7 +151,7 @@ namespace AnalysisDashboard.Pages
         }
 
         [JSInvokable]
-        public void ClickBarChart(string barId)
+        public void ClickBarChart1(string barId)
         { 
             BarChartItemInfoList.Clear();
             var grouppedCodeList = dataInfo.Data.GroupBy(item => item.Code).ToList().Where(group => group.Key.Equals(barId)).ToList();
@@ -170,7 +172,30 @@ namespace AnalysisDashboard.Pages
             ShowTable = true;
             StateHasChanged(); 
         }
-         
+
+        [JSInvokable]
+        public void ClickBarChart2(string barId)
+        {
+            BarChartItemInfoList.Clear();
+            var grouppedCodeList = dataInfo.Data.GroupBy(item => item.Code).ToList().Where(group => group.Key.Equals(barId)).ToList();
+
+            if (grouppedCodeList.Count > 0)
+            {
+                foreach (var group in grouppedCodeList[0])
+                {
+                    BarChartItemInfo newItem = new BarChartItemInfo();
+                    newItem.Date = group.Date.ToString("dd.MM.yyyy");
+                    newItem.Sum = group.Credit.ToString("#,##0.########");
+                    newItem.PurposeOfPayment = group.PurposeOfPayment;
+
+                    BarChartItemInfoList.Add(newItem);
+                }
+            }
+
+            ShowTable = true;
+            StateHasChanged();
+        }
+
         int forward = 0;
         public async void ClickForward()
         { 
@@ -206,8 +231,8 @@ namespace AnalysisDashboard.Pages
         {
             forward = 0;
             clickedMonth = true;
-            ClickedMonthStyle = ClickedStyle;
-            ClickedWeekStyle = "";
+            ClickedMonthStyle = ClickedStyle + "color: blue;";
+            ClickedWeekStyle = "color: gray;";
 
             await SortByMonth(0);
         }
@@ -216,8 +241,8 @@ namespace AnalysisDashboard.Pages
         {
             forward = 0;
             clickedMonth = false;
-            ClickedMonthStyle = "";
-            ClickedWeekStyle = ClickedStyle;
+            ClickedWeekStyle = ClickedStyle + "color: blue;";
+            ClickedMonthStyle = "color: gray;";
 
             await SortByWeek(0);
         }
