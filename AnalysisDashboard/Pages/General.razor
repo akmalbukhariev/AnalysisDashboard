@@ -1,19 +1,42 @@
 ﻿@page "/general"
 @*@page "/"*@
 
-@inherits GeneralBase
-@using AnalysisDashboard.Components
+@inject IStringLocalizer<App> Localizer
 
+@inherits GeneralBase
+@using AnalysisDashboard.Components 
+
+<table class="header_table _second">
+   <thead>
+	   <tr>
+		   <td align="center" style="width: 34%;">
+            <table>
+              <thead>
+                <tr> 
+                  <td>
+                    <img src="images/logo.png" height="40">
+                  </td> 
+                  <td>
+                    <p class="text4">Analysis Dashboard</p>
+                  </td> 
+                </tr>
+              </thead>
+            </table>
+          </td> 
+	   </tr>
+   </thead>
+</table>
+<LanguageView/>
  <div class="big_container">   
 	<div class="tableOverlay" style="display: @(ShowTable ? "block" : "none")">
 		<div style="width: 750px" align="center" class="popup">
-			<h3>Разбивка Chart</h3>
+			<h3>@Localizer["BreakdownChart"]</h3>
 			<table style="font-size: 14px;" id="myTable" class="fixed_header" align="center">
 				<thead>
 					<tr class="header">
-						<td class="td1">Дата платежа</td>
-						<td class="td2">Сумма</td>
-						<td class="td3">Назначение платежа</td>
+						<td class="td1">@Localizer["PaymentDate"]</td>
+						<td class="td2">@Localizer["Sum"]</td>
+						<td class="td3">@Localizer["PurposeOfPayment"]</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +62,7 @@
 							<thead>
 								<tr>
 									<td align="center" style="font-size: 16px; font-weight: bold; color: #343A40;">
-										Расход
+										@Localizer["Consumption"]
 									</td>
 								</tr>
 								<tr>
@@ -57,7 +80,7 @@
 							<thead>
 								<tr>
 									<td align="center" style="font-size: 16px; font-weight: bold; color: #343A40;">
-										Прибыль
+										@Localizer["Profit"]
 									</td>
 								</tr>
 								<tr>
@@ -75,50 +98,50 @@
 							<thead>
 								<tr>
 									<td align="center" style="font-size: 16px; font-weight: bold; padding: 5px 0 15px 0; color: #343A40;">
-										Баланс
+										@Localizer["Balance"]
 									</td>
 								</tr>
 								<tr>
-									<td align="center" class="tab_third_1 apricot1">
-										Баланс в начале периода
+									<td align="center" class="tab_third_1 apricot1"> 
+										@Localizer["BalanceAtTheBeginningOfThePeriod"]
 									</td>
 								</tr>
 								<tr>
 									<td align="center" class="tab_third_2 apricot2">
-										@BalanceAtTheBeginningOfThePeriod Сум
+										@BalanceAtTheBeginningOfThePeriod
 									</td>
 								</tr>
 								<tr class="int_horizontal"><td></td></tr>
 								<tr>
 									<td align="center" class="tab_third_1 dirty1">
-										Расход за период
+										@Localizer["ExpenseForThePeriod"]
 									</td>
 								</tr>
 								<tr>
 									<td align="center" class="tab_third_2 dirty2">
-										@FxpenseForThePeriod Сум
+										@FxpenseForThePeriod
 									</td>
 								</tr>
 								<tr class="int_horizontal"><td></td></tr>
 								<tr>
 									<td align="center" class="tab_third_1 peach1">
-										Поступление за период
+										@Localizer["ReceiptForThePeriod"]
 									</td>
 								</tr>
 								<tr>
 									<td align="center" class="tab_third_2 peach2">
-										@FceiptForThePeriod Сум
+										@FceiptForThePeriod
 									</td>
 								</tr>
 								<tr class="int_horizontal"><td></td></tr>
 								<tr>
 									<td align="center" class="tab_third_1 broccoli1">
-										БАЛАНС НА КОНЕЦ ПЕРИОДА
+										@Localizer["BalanceAtTheEndOfThePeriod"]
 									</td>
 								</tr>
 								<tr>
 									<td align="center" class="tab_third_2 broccoli2">
-										@BalanceAtTheEndOfThePeriod Сум
+										@BalanceAtTheEndOfThePeriod
 									</td>
 								</tr>
 							</thead>
@@ -133,7 +156,7 @@
 							<thead>
 								<tr>
 									<td align="center" colspan="2" style="font-size: 16px; font-weight: bold; color: #343A40;">
-										Динамика поступлений и расходов
+										@Localizer["DynamicsOfIncomeAndExpenses"]
 									</td>
 								</tr>
 								<tr>
@@ -142,9 +165,9 @@
 										<button class="btn _circle" @onclick="ClickForward"><i class="fa fa-angle-double-right"></i></button>
 									</td>
 									<td align="right" style="padding-bottom: 20px; font-size: 14px; font-weight: bold;">
-										<a href="" @onclick="ClickedMonth" @onclick:preventDefault style=@ClickedMonthStyle>Месяц</a>
+										<a href="" @onclick="ClickedMonth" @onclick:preventDefault style=@ClickedMonthStyle>@Localizer["Month"]</a>
 										|
-										<a href="" @onclick="ClickedWeek" @onclick:preventDefault style=@ClickedWeekStyle>Неделя</a>
+										<a href="" @onclick="ClickedWeek" @onclick:preventDefault style=@ClickedWeekStyle>@Localizer["Week"]</a>
 									</td>
 								</tr>
 								<tr>

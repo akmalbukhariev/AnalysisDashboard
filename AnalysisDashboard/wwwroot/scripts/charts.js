@@ -514,3 +514,7 @@ function Chart_3() {
 		chart3.render();
 	}
 }
+
+function refreshChartPage() { 
+	DotNetHelper.invokeMethodAsync('RefreshChartPage');
+}

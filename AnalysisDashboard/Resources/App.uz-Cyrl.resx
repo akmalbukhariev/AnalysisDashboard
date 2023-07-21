@@ -117,22 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Баланс</value>
+  </data>
+  <data name="BalanceAtTheBeginningOfThePeriod" xml:space="preserve">
+    <value>Давр бошидаги қолдиқ</value>
+  </data>
+  <data name="BalanceAtTheEndOfThePeriod" xml:space="preserve">
+    <value>ДAВРAН ОХИРГИ БAЛAНСИ</value>
+  </data>
+  <data name="BreakdownChart" xml:space="preserve">
+    <value>Бузилиш жадвали</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Истеъмол</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Сум</value>
+  </data>
+  <data name="DropFileTitle1" xml:space="preserve">
+    <value>Маълумотни таҳлил қилиш учун Ехcел файлларини юклашингиз керак</value>
+  </data>
+  <data name="DropFileTitle2" xml:space="preserve">
+    <value>Файлни шу йерга ташланг</value>
+  </data>
+  <data name="DropFileTitle3" xml:space="preserve">
+    <value>ёки тугмани босинг</value>
+  </data>
+  <data name="DynamicsOfIncomeAndExpenses" xml:space="preserve">
+    <value>Даромад ва харажатлар динамикаси</value>
+  </data>
+  <data name="ExpenseForThePeriod" xml:space="preserve">
+    <value>Давр учун харажатлар</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Забыли пароль?</value>
+    <value>Пролни унутдингизми?</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Войти в систему</value>
+    <value>Кириш</value>
+  </data>
+  <data name="Message1" xml:space="preserve">
+    <value>Биз маълумотларни йўқотдик. Олдинги саҳифа қайтарилади</value>
+  </data>
+  <data name="Message2" xml:space="preserve">
+    <value>Тотўғри файл.</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Ой</value>
   </data>
   <data name="NotRegistered" xml:space="preserve">
-    <value>Если нет аккаунта, зарегистрируйтесь</value>
+    <value>Aгар рўйхатдан ўтмаган бўлсангиз, рўйхатдан ўтинг</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Analysis Dashboard</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>Парол</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Тўлов санаси</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Фойда</value>
+  </data>
+  <data name="PurposeOfPayment" xml:space="preserve">
+    <value>Тўлов мақсади</value>
+  </data>
+  <data name="ReceiptForThePeriod" xml:space="preserve">
+    <value>Давр учун квитансия</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Запомнить меня</value>
+    <value>Еслаб қолиш</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Файлни танланг</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Ҳафта</value>
   </data>
 </root>

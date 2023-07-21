@@ -117,22 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Баланс</value>
+  </data>
+  <data name="BalanceAtTheBeginningOfThePeriod" xml:space="preserve">
+    <value>Баланс в начале периода</value>
+  </data>
+  <data name="BalanceAtTheEndOfThePeriod" xml:space="preserve">
+    <value>БАЛАНС НА КОНЕЦ ПЕРИОДА</value>
+  </data>
+  <data name="BreakdownChart" xml:space="preserve">
+    <value>Разбивка Диаграмма</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Расход</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Сум</value>
+  </data>
+  <data name="DropFileTitle1" xml:space="preserve">
+    <value>Чтобы анализировать информацию, нужно загрузить файлы Excel</value>
+  </data>
+  <data name="DropFileTitle2" xml:space="preserve">
+    <value>Перетащите файл сюда</value>
+  </data>
+  <data name="DropFileTitle3" xml:space="preserve">
+    <value>или нажмите на кнупку</value>
+  </data>
+  <data name="DynamicsOfIncomeAndExpenses" xml:space="preserve">
+    <value>Динамика поступлений и расходов</value>
+  </data>
+  <data name="ExpenseForThePeriod" xml:space="preserve">
+    <value>Расход за период</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot password?</value>
+    <value>Забыли пароль?</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Войти в систему</value>
+  </data>
+  <data name="Message1" xml:space="preserve">
+    <value>Мы потеряли данные. Предыдущая страница возвращается.</value>
+  </data>
+  <data name="Message2" xml:space="preserve">
+    <value>Неверный файл.</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Месяц</value>
   </data>
   <data name="NotRegistered" xml:space="preserve">
-    <value>If you don't have an account, register</value>
+    <value>Если нет аккаунта, зарегистрируйтесь</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Analysis Dashboard</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Пароль</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Дата платежа</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Прибыль</value>
+  </data>
+  <data name="PurposeOfPayment" xml:space="preserve">
+    <value>Назначение платежа</value>
+  </data>
+  <data name="ReceiptForThePeriod" xml:space="preserve">
+    <value>Поступление за период</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+    <value>Запомнить меня</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Выбрать файл</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Неделя</value>
   </data>
 </root>

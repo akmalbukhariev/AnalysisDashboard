@@ -1,14 +1,16 @@
 ﻿using AnalysisDashboard.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System.Globalization;
 using System.Linq;
 
 namespace AnalysisDashboard.Pages
 {
     public class IndexBase : IPage
-    {
+    { 
         [Parameter]
         public int ProgressCount { get; set; } = 0;
 
@@ -17,52 +19,61 @@ namespace AnalysisDashboard.Pages
 
         [Inject]
         public DataInfo dataInfo { get; set; }
+          
         public IndexBase()
         {
-            //string sss = "";// "00668~За перевод электронных";
+            //string sss = " 2,945,592.28";
+            //double sDigit = double.Parse(sss, CultureInfo.InvariantCulture);
             //sss = sss.Substring(0, 5);
 
             dataInfo = new DataInfo();
         }
-
+         
         public async Task FileUploadOnChange(InputFileChangeEventArgs e)
         {
-            ShowLoading = true;
-            var file = e.File;
-            if (file != null)
+            try
             {
-                using var ms = new MemoryStream();
-                await file.OpenReadStream().CopyToAsync(ms);
-                ms.Position = 0;
+                ShowLoading = true;
+                var file = e.File;
+                if (file != null)
+                {
+                    using var ms = new MemoryStream();
+                    await file.OpenReadStream().CopyToAsync(ms);
+                    ms.Position = 0;
 
-                ISheet sheet;
-                var xsswb = new XSSFWorkbook(ms);
+                    ISheet sheet;
+                    var xsswb = new XSSFWorkbook(ms);
 
-                sheet = xsswb.GetSheetAt(0);
-                IRow headerRow = sheet.GetRow(0);
-                int colCount = headerRow.LastCellNum;
+                    sheet = xsswb.GetSheetAt(0);
+                    IRow headerRow = sheet.GetRow(0);
+                    int colCount = headerRow.LastCellNum;
 
-                dataInfo.Header = GetDataHeader(sheet, colCount);
-                 
-                headerRow = sheet.GetRow(4);
-                colCount = headerRow.LastCellNum;
-                
-                for (var j = 5; j <= sheet.LastRowNum; j++)
-                { 
-                    var row = sheet.GetRow(j);
-                    DataItem item = GetRowItem(row, colCount);
+                    dataInfo.Header = GetDataHeader(sheet, colCount);
 
-                    if (item.Account_Tin.Trim() != "")
-                        dataInfo.Data.Add(item);
+                    headerRow = sheet.GetRow(4);
+                    colCount = headerRow.LastCellNum;
+
+                    for (var j = 5; j <= sheet.LastRowNum; j++)
+                    {
+                        var row = sheet.GetRow(j);
+                        DataItem item = GetRowItem(row, colCount);
+
+                        if (item.Account_Tin.Trim() != "")
+                            dataInfo.Data.Add(item);
+                    }
                 }
+
+                dataInfo.Header.FxpenseForThePeriod = (from item in dataInfo.Data select item.Debit).Sum();
+                dataInfo.Header.FceiptForThePeriod = (from item in dataInfo.Data select item.Credit).Sum();
+
+                ShowLoading = false;
+
+                Navigation.NavigateTo("/general");
             }
-
-            dataInfo.Header.FxpenseForThePeriod = (from item in dataInfo.Data select item.Debit).Sum();
-            dataInfo.Header.FceiptForThePeriod = (from item in dataInfo.Data select item.Credit).Sum();
-
-            ShowLoading = false;
-
-            Navigation.NavigateTo("/general");
+            catch (Exception ex)
+            {
+                await jsRuntime.InvokeVoidAsync("alert", Localizer["Message2"]);
+            }
         }
 
         private DataHeader GetDataHeader(ISheet sheet, int colCount)
@@ -144,7 +155,7 @@ namespace AnalysisDashboard.Pages
                         {
                             string format = "dd.MM.yyyy HH:mm:ss";
                             DateTime dateTime;
-                            if (DateTime.TryParseExact(row.GetCell(i).ToString(), format, null, System.Globalization.DateTimeStyles.None, out dateTime))
+                            if (DateTime.TryParseExact(row.GetCell(i).ToString(), format, null, DateTimeStyles.None, out dateTime))
                                 item.Date = dateTime;
                         }
                         break;
@@ -152,8 +163,8 @@ namespace AnalysisDashboard.Pages
                     case 2: item.NoDokta = row.GetCell(i).ToString(); break;
                     case 3: item.Op = row.GetCell(i).ToString(); break;
                     case 4: item.Mfo = row.GetCell(i).ToString(); break;
-                    case 5: item.Debit = Convert.ToDouble(row.GetCell(i).ToString().Replace(",","")); break;
-                    case 6: item.Credit = Convert.ToDouble(row.GetCell(i).ToString().Replace(",", "")); break;
+                    case 5: item.Debit = double.Parse(row.GetCell(i).ToString().Trim(), CultureInfo.InvariantCulture); break;
+                    case 6: item.Credit = double.Parse(row.GetCell(i).ToString().Trim(), CultureInfo.InvariantCulture); break;
                     case 7:
                         {
                             item.PurposeOfPayment = row.GetCell(i).ToString();
@@ -177,7 +188,7 @@ namespace AnalysisDashboard.Pages
             string tempStr = str.Substring(startIndex, endIndex - startIndex) + ":";
             str = str.Replace(tempStr, "").RemoveWhitespace().Trim();
 
-            return Convert.ToDouble(str);
+            return double.Parse(str, CultureInfo.InvariantCulture);
         }
     }
 }

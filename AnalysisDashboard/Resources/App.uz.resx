@@ -117,11 +117,53 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Balans</value>
+  </data>
+  <data name="BalanceAtTheBeginningOfThePeriod" xml:space="preserve">
+    <value>Davr boshidagi qoldiq</value>
+  </data>
+  <data name="BalanceAtTheEndOfThePeriod" xml:space="preserve">
+    <value>DAVRAN OXIRGI BALANSI</value>
+  </data>
+  <data name="BreakdownChart" xml:space="preserve">
+    <value>Buzilish jadvali</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Iste'mol</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="DropFileTitle1" xml:space="preserve">
+    <value>Ma'lumotni tahlil qilish uchun Excel fayllarini yuklashingiz kerak</value>
+  </data>
+  <data name="DropFileTitle2" xml:space="preserve">
+    <value>Faylni shu yerga tashlang</value>
+  </data>
+  <data name="DropFileTitle3" xml:space="preserve">
+    <value>yoki tugmani bosing</value>
+  </data>
+  <data name="DynamicsOfIncomeAndExpenses" xml:space="preserve">
+    <value>Daromad va xarajatlar dinamikasi</value>
+  </data>
+  <data name="ExpenseForThePeriod" xml:space="preserve">
+    <value>Davr uchun xarajatlar</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Prolni unutdingizmi?</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Kirish</value>
+  </data>
+  <data name="Message1" xml:space="preserve">
+    <value>Biz maʼlumotlarni yoʻqotdik. Oldingi sahifa qaytariladi</value>
+  </data>
+  <data name="Message2" xml:space="preserve">
+    <value>Toto'g'ri fayl.</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Oy</value>
   </data>
   <data name="NotRegistered" xml:space="preserve">
     <value>Agar ro'yxatdan o'tmagan bo'lsangiz, ro'yxatdan o'ting</value>
@@ -132,7 +174,28 @@
   <data name="Password" xml:space="preserve">
     <value>Parol</value>
   </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>To'lov sanasi</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Foyda</value>
+  </data>
+  <data name="PurposeOfPayment" xml:space="preserve">
+    <value>To'lov maqsadi</value>
+  </data>
+  <data name="ReceiptForThePeriod" xml:space="preserve">
+    <value>Davr uchun kvitansiya</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Eslab qolish</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Faylni tanlang</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Summa</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Hafta</value>
   </data>
 </root>

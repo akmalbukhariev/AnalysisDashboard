@@ -5,17 +5,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Newtonsoft.Json;
 using AnalysisDashboard.Helper;
+using Microsoft.Extensions.Localization;
 
 namespace AnalysisDashboard.Pages
 {
     public class GeneralBase : IPage
-    {
-        [Inject]
-        IJSRuntime jsruntime { get; set; }
-
-        //[Inject]
-        //ProtectedSessionStorage ProtectedSessionStore { get; set; }
-
+    { 
         [Inject]
         public DataInfo dataInfo { get; set; } 
 
@@ -39,7 +34,7 @@ namespace AnalysisDashboard.Pages
 
         [Parameter]
         public bool ShowTable { get; set; } = false;
-
+         
         string ClickedStyle = "text-decoration: underline solid #0077b6 2px;";
         
         [Parameter]
@@ -52,43 +47,57 @@ namespace AnalysisDashboard.Pages
             ClickedWeekStyle = "color: gray;";
         }
 
-        protected override async void OnInitialized()
-        {
-            var dotNetReference = DotNetObjectReference.Create(this);
-            await jsruntime.InvokeVoidAsync("setObjReference", dotNetReference);
-
+        protected override void OnInitialized()
+        { 
             if (dataInfo != null && dataInfo.Header != null)
             {
-                BalanceAtTheBeginningOfThePeriod = dataInfo.Header.BalanceAtTheBeginningOfPeriod.ToString("#,##0.########");
-                FxpenseForThePeriod = dataInfo.Header.FxpenseForThePeriod.ToString("#,##0.########");
-                FceiptForThePeriod = dataInfo.Header.FceiptForThePeriod.ToString("#,##0.########");
-                BalanceAtTheEndOfThePeriod = dataInfo.Header.BalanceAtTheEndOfThePeriod.ToString("#,##0.########"); 
-            }
+                string currency = Localizer["Currency"];
+                BalanceAtTheBeginningOfThePeriod = dataInfo.Header.BalanceAtTheBeginningOfPeriod.ToString("#,##0.########") + currency;
+                FxpenseForThePeriod = dataInfo.Header.FxpenseForThePeriod.ToString("#,##0.########") + currency;
+                FceiptForThePeriod = dataInfo.Header.FceiptForThePeriod.ToString("#,##0.########") + currency;
+                BalanceAtTheEndOfThePeriod = dataInfo.Header.BalanceAtTheEndOfThePeriod.ToString("#,##0.########") + currency;
+            } 
         }
          
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
-            { 
-                foreach (string code in CodeTable.Instance.table.Keys)
+            if (dataInfo.Header == null)
+            {
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                if (firstRender)
                 {
-                    var grouppedSearchCodeList = dataInfo.Data.GroupBy(item => item.Code.Equals(code)).ToList();
-                    foreach (var group in grouppedSearchCodeList)
+                    foreach (string code in CodeTable.Instance.table.Keys)
                     {
-                        if (group.Key)
+                        var grouppedSearchCodeList = dataInfo.Data.GroupBy(item => item.Code.Equals(code)).ToList();
+                        foreach (var group in grouppedSearchCodeList)
                         {
-                            foreach (var item in group)
+                            if (group.Key)
                             {
-                                item.NameOfCode = CodeTable.Instance.GetData(code).Trim();
+                                foreach (var item in group)
+                                {
+                                    item.NameOfCode = CodeTable.Instance.GetData(code).Trim();
+                                }
                             }
                         }
                     }
-                }
 
-                await DebitBar();
-                await CreditBar();
-                await SortByMonth(0); 
-            } 
+                    await DebitBar();
+                    await CreditBar();
+                    await SortByMonth(0);
+                }
+                 
+                var dotNetReference = DotNetObjectReference.Create(this);
+                await jsRuntime.InvokeVoidAsync("setObjReference", dotNetReference);
+            }
+        }
+
+        [JSInvokable]
+        public async void RefreshChartPage()
+        {
+            await jsRuntime.InvokeVoidAsync("alert", Localizer["Message1"]);
         }
 
         public void CloseTableInfo()
@@ -115,12 +124,12 @@ namespace AnalysisDashboard.Pages
                 newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
                 newItem.Color = getRandColor();
 
-                await jsruntime.InvokeVoidAsync("addDebitBar", newItem);
+                await jsRuntime.InvokeVoidAsync("addDebitBar", newItem);
             }
 
             sumDebit = sumDebitList.Sum(item => item.Item2);
             string strSum = double.Parse(String.Format("{0:0.00}", sumDebit)).ToString("#,##0.########");
-            await jsruntime.InvokeVoidAsync("Chart_1", strSum + " Сум");
+            await jsRuntime.InvokeVoidAsync("Chart_1", strSum + " Сум");
         }
 
         async Task CreditBar()
@@ -142,12 +151,12 @@ namespace AnalysisDashboard.Pages
                 newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
                 newItem.Color = getRandColor();
 
-                await jsruntime.InvokeVoidAsync("addBarCredit", newItem);
+                await jsRuntime.InvokeVoidAsync("addBarCredit", newItem);
             }
 
             sumCredit = sumCreditList.Sum(item => item.Item2);
             string strSum = double.Parse(String.Format("{0:0.00}", sumCredit)).ToString("#,##0.########");
-            await jsruntime.InvokeVoidAsync("Chart_2", strSum + " Сум");
+            await jsRuntime.InvokeVoidAsync("Chart_2", strSum + " Сум");
         }
 
         [JSInvokable]
@@ -249,8 +258,8 @@ namespace AnalysisDashboard.Pages
 
         async Task SortByMonth(int index)
         {
-            await jsruntime.InvokeVoidAsync("cleanDebitList");
-            await jsruntime.InvokeVoidAsync("cleanCreditList");
+            await jsRuntime.InvokeVoidAsync("cleanDebitList");
+            await jsRuntime.InvokeVoidAsync("cleanCreditList");
               
             var debitList3 = (from item in dataInfo.Data select (item.Date, item.Debit)).GroupBy(item => item.Date.Month).ToList();
             var creditList3 = (from item in dataInfo.Data select (item.Date, item.Credit)).GroupBy(item => item.Date.Month).ToList();
@@ -278,9 +287,9 @@ namespace AnalysisDashboard.Pages
                     newItem.Year = tList[0].Date.Year;
                     newItem.Month = tList[0].Date.Month;
                     newItem.Day = tList[0].Date.Day;
-                    newItem.Amount = Convert.ToDouble(debitSums3[i]);
+                    newItem.Amount = debitSums3[i];
 
-                    await jsruntime.InvokeVoidAsync("addDebit", newItem);
+                    await jsRuntime.InvokeVoidAsync("addDebit", newItem);
                 }
             }
 
@@ -296,19 +305,19 @@ namespace AnalysisDashboard.Pages
                     newItem.Year = tList[0].Date.Year;
                     newItem.Month = tList[0].Date.Month;
                     newItem.Day = tList[0].Date.Day;
-                    newItem.Amount = Convert.ToDouble(creditSums3[i]);
+                    newItem.Amount = creditSums3[i];
 
-                    await jsruntime.InvokeVoidAsync("addCredit", newItem);
+                    await jsRuntime.InvokeVoidAsync("addCredit", newItem);
                 }
             }
              
-            await jsruntime.InvokeVoidAsync("Chart_3");
+            await jsRuntime.InvokeVoidAsync("Chart_3");
         }
 
         async Task SortByWeek(int index)
         {
-            await jsruntime.InvokeVoidAsync("cleanDebitList");
-            await jsruntime.InvokeVoidAsync("cleanCreditList");
+            await jsRuntime.InvokeVoidAsync("cleanDebitList");
+            await jsRuntime.InvokeVoidAsync("cleanCreditList");
 
             var debitList = (from item in dataInfo.Data select (item.Date, item.Debit)).GroupBy(item => item.Date.StartOfWeek(DayOfWeek.Monday)).ToList();
             var creditList = (from item in dataInfo.Data select (item.Date, item.Credit)).GroupBy(item => item.Date.StartOfWeek(DayOfWeek.Monday)).ToList();
@@ -328,9 +337,9 @@ namespace AnalysisDashboard.Pages
                     newItem.Year = tList[0].Date.Year;
                     newItem.Month = tList[0].Date.Month;
                     newItem.Day = tList[0].Date.Day;
-                    newItem.Amount = Convert.ToDouble(debitSums[i]);
+                    newItem.Amount = debitSums[i];
 
-                    await jsruntime.InvokeVoidAsync("addDebit", newItem);
+                    await jsRuntime.InvokeVoidAsync("addDebit", newItem);
                 }
             }
 
@@ -346,13 +355,13 @@ namespace AnalysisDashboard.Pages
                     newItem.Year = tList[0].Date.Year;
                     newItem.Month = tList[0].Date.Month;
                     newItem.Day = tList[0].Date.Day;
-                    newItem.Amount = Convert.ToDouble(creditSums[i]);
+                    newItem.Amount = creditSums[i];
 
-                    await jsruntime.InvokeVoidAsync("addCredit", newItem);
+                    await jsRuntime.InvokeVoidAsync("addCredit", newItem);
                 }
             }
 
-            await jsruntime.InvokeVoidAsync("Chart_3");
+            await jsRuntime.InvokeVoidAsync("Chart_3");
         }
 
         private string getRandColor()

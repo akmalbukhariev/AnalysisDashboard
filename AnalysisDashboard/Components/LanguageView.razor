@@ -1,0 +1,93 @@
+﻿@inject NavigationManager Navigation
+
+ <table class="header_table">
+    <thead>
+        <tr>
+            <td align="left" style="width: 33%;"> </td>
+            <td align="center" style="width: 34%;"></td>
+            <td align="right" style="width: 33%;">
+                <table>
+                    <thead>
+                    <tr>
+                        <td>
+                        <details class="dropdown _center">
+                            <summary role="button">
+                                <div class="language">
+                                    <img src="@LanguageFlag" width="30">
+                                </div>
+                            </summary>
+                            <ul>
+                                <li>
+                                    <a href="" @onclick="@(e => ClickLanguage("uz"))">
+                                        <img src="images/uz.png" width="30">
+                                        <label class="language">O'zbekcha</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" @onclick="@(e => ClickLanguage("uzCyrl"))">
+                                        <img src="images/uz.png" width="30">
+                                        <label class="language">Ўзбекча</label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" @onclick="@(e => ClickLanguage("ru"))">
+                                        <img src="images/ru.png" width="30">
+                                        <label class="language">Русский</label>
+                                    </a>
+                                </li>
+                               @* <li>
+                                    <a href="" @onclick="@(e => ClickLanguage("en"))">
+                                        <img src="images/en.png" width="30">
+                                        <label class="language">English</label>
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </details>
+                        </td>  
+                    </tr>
+                    </thead>
+                </table>       
+            </td>
+        </tr>
+    </thead>
+</table>
+
+@code{
+
+    [Parameter]
+    public string LanguageFlag { get; set; } 
+
+    protected override void OnInitialized()
+    {
+        string selectedCulture = Thread.CurrentThread.CurrentCulture.Name;
+        switch (selectedCulture)
+        {
+            case "uz-UZ":   LanguageFlag = "images/uz.png"; break;
+            case "uz-Cyrl": LanguageFlag = "images/uz.png"; break;
+            case "ru-RU":   LanguageFlag = "images/ru.png"; break;
+            case "en-US":   LanguageFlag = "images/en.png"; break;
+        } 
+    }
+
+    public void ClickLanguage(string lanCode)
+    {
+        string selectedCulture = Thread.CurrentThread.CurrentCulture.Name;
+        switch (lanCode)
+        {
+            case "uz":      selectedCulture = "uz-UZ";   LanguageFlag = "images/uz.png"; break;
+            case "uzCyrl":  selectedCulture = "uz-Cyrl"; LanguageFlag = "images/uz.png"; break;
+            case "ru":      selectedCulture = "ru-RU";   LanguageFlag = "images/ru.png"; break;
+            case "en":      selectedCulture = "en-US";   LanguageFlag = "images/en.png"; break;
+        }
+
+        if (string.IsNullOrWhiteSpace(selectedCulture))
+        {
+            return;
+        }
+
+        var uri = new Uri(Navigation.Uri).GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+        var query = $"?culture={Uri.EscapeDataString(selectedCulture)}&" + $"redirectUri={Uri.EscapeDataString(uri)}";
+
+        Navigation.NavigateTo("/Culture/SetCulture" + query, forceLoad: true); 
+    }
+}

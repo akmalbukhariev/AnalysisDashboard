@@ -117,22 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="BalanceAtTheBeginningOfThePeriod" xml:space="preserve">
+    <value>Balance at the beginning of the period</value>
+  </data>
+  <data name="BalanceAtTheEndOfThePeriod" xml:space="preserve">
+    <value>BALANCE AT THE END OF THE PERIOD</value>
+  </data>
+  <data name="BreakdownChart" xml:space="preserve">
+    <value>Breakdown Chart</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Consumption</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="DropFileTitle1" xml:space="preserve">
+    <value>To analyze the information, you need to upload Excel files</value>
+  </data>
+  <data name="DropFileTitle2" xml:space="preserve">
+    <value>Drag file here</value>
+  </data>
+  <data name="DropFileTitle3" xml:space="preserve">
+    <value>or click on the button</value>
+  </data>
+  <data name="DynamicsOfIncomeAndExpenses" xml:space="preserve">
+    <value>Dynamics of income and expenses</value>
+  </data>
+  <data name="ExpenseForThePeriod" xml:space="preserve">
+    <value>Expense for the period</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Пролни унутдингизми?</value>
+    <value>Forgot password?</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Кириш</value>
+    <value>Login</value>
+  </data>
+  <data name="Message1" xml:space="preserve">
+    <value>We have lost data. Previous page returns</value>
+  </data>
+  <data name="Message2" xml:space="preserve">
+    <value>Wring file.</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
   </data>
   <data name="NotRegistered" xml:space="preserve">
-    <value>Aгар рўйхатдан ўтмаган бўлсангиз, рўйхатдан ўтинг</value>
+    <value>If you don't have an account, register</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Analysis Dashboard</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Парол</value>
+    <value>Password</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Payment Date</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Profit</value>
+  </data>
+  <data name="PurposeOfPayment" xml:space="preserve">
+    <value>Purpose of payment</value>
+  </data>
+  <data name="ReceiptForThePeriod" xml:space="preserve">
+    <value>Receipt for the period</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Еслаб қолиш</value>
+    <value>Remember me</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Week</value>
   </data>
 </root>
