@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using AnalysisDashboard.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 
 namespace AnalysisDashboard.Pages
 {
-    public class IPage : ComponentBase
+    public class BasePage : ComponentBase
     {
+        [Inject]
+        public DataInfo dataInfo { get; set; }
+
         [Inject]
         protected NavigationManager Navigation { get; set; }
 
@@ -18,7 +22,7 @@ namespace AnalysisDashboard.Pages
         [Inject]
         protected IStringLocalizer<App> Localizer { get; set; }
 
-        public IPage()
+        public BasePage()
         {
             
         }

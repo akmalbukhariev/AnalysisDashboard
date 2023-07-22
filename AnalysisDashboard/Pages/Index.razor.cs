@@ -9,17 +9,8 @@ using System.Linq;
 
 namespace AnalysisDashboard.Pages
 {
-    public class IndexBase : IPage
-    { 
-        [Parameter]
-        public int ProgressCount { get; set; } = 0;
-
-        [Parameter]
-        public int ProgressMax { get; set; } = 0;
-
-        [Inject]
-        public DataInfo dataInfo { get; set; }
-          
+    public class IndexBase : BasePage
+    {   
         public IndexBase()
         {
             //string sss = " 2,945,592.28";
@@ -31,6 +22,10 @@ namespace AnalysisDashboard.Pages
          
         public async Task FileUploadOnChange(InputFileChangeEventArgs e)
         {
+            double ss = 59187149.45;
+            //string sd = ss.ToString("#,##0.########", CultureInfo.GetCultureInfo("ru-RU"));
+            string sd = ss.ToString("N2", CultureInfo.InvariantCulture);
+            //sd = sd.Replace(" ", "\u00A0");
             try
             {
                 ShowLoading = true;
@@ -72,7 +67,9 @@ namespace AnalysisDashboard.Pages
             }
             catch (Exception ex)
             {
-                await jsRuntime.InvokeVoidAsync("alert", Localizer["Message2"]);
+                ShowLoading = false;
+                string message = Localizer["Message2"];
+                await jsRuntime.InvokeVoidAsync("alert", message);
             }
         }
 
@@ -148,7 +145,7 @@ namespace AnalysisDashboard.Pages
             DataItem item = new DataItem();
 
             for (var i = row.FirstCellNum; i < colCount; i++)
-            {
+            { 
                 switch (i)
                 {
                     case 0:
@@ -163,8 +160,18 @@ namespace AnalysisDashboard.Pages
                     case 2: item.NoDokta = row.GetCell(i).ToString(); break;
                     case 3: item.Op = row.GetCell(i).ToString(); break;
                     case 4: item.Mfo = row.GetCell(i).ToString(); break;
-                    case 5: item.Debit = double.Parse(row.GetCell(i).ToString().Trim(), CultureInfo.InvariantCulture); break;
-                    case 6: item.Credit = double.Parse(row.GetCell(i).ToString().Trim(), CultureInfo.InvariantCulture); break;
+                    case 5:
+                        {
+                            string strDebit = row.GetCell(i).ToString().Trim();
+                            item.Debit = double.Parse(strDebit); 
+                        }
+                        break;
+                    case 6:
+                        {
+                            string strCredit = row.GetCell(i).ToString().Trim();
+                            item.Credit = double.Parse(strCredit); 
+                        }
+                        break;
                     case 7:
                         {
                             item.PurposeOfPayment = row.GetCell(i).ToString();

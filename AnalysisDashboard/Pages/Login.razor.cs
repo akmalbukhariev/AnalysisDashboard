@@ -2,7 +2,7 @@
 
 namespace AnalysisDashboard.Pages
 {
-    public class LoginBase : IPage
+    public class LoginBase : BasePage
     { 
         public LoginBase()
         {
