@@ -78,8 +78,8 @@
     #myTable th, #myTable td {
         padding: 8px;
         border: 1px solid #DEE2E6;
-        word-break: keep-all;
         font-weight: normal;
+        word-break: break-all;
     }
 
 .td1 {

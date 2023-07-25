@@ -12,20 +12,12 @@ namespace AnalysisDashboard.Pages
     public class IndexBase : BasePage
     {   
         public IndexBase()
-        {
-            //string sss = " 2,945,592.28";
-            //double sDigit = double.Parse(sss, CultureInfo.InvariantCulture);
-            //sss = sss.Substring(0, 5);
-
+        { 
             dataInfo = new DataInfo();
         }
          
         public async Task FileUploadOnChange(InputFileChangeEventArgs e)
-        {
-            double ss = 59187149.45;
-            //string sd = ss.ToString("#,##0.########", CultureInfo.GetCultureInfo("ru-RU"));
-            string sd = ss.ToString("N2", CultureInfo.InvariantCulture);
-            //sd = sd.Replace(" ", "\u00A0");
+        { 
             try
             {
                 ShowLoading = true;

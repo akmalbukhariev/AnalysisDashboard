@@ -29,8 +29,22 @@ namespace AnalysisDashboard.Pages
         [Parameter]
         public bool ShowTable { get; set; } = false;
          
-        string ClickedStyle = "text-decoration: underline solid #0077b6 2px;";
-        
+        string ClickedStyle = "text-decoration: underline solid #0077b6 1px;  a.blue,a.blue:visited {color: #0096C7;} "; 
+        /*        
+         a.blue,a.blue:visited {
+          color: #0096C7;
+        } 
+        a.blue:hover,a.blue:active {
+          color: #0077b6;
+        } 
+        a.gray,a.gray:visited {
+          color: #495057;
+        } 
+        a.gray:hover,a.gray:active {
+          color: #343A40;
+        } 
+        */
+         
         [Parameter]
         public List<BarChartItemInfo> BarChartItemInfoList { get; set; }
          
@@ -113,9 +127,8 @@ namespace AnalysisDashboard.Pages
                 sumDebitList.Add((group.Key, group.Sum(item => item.Debit)));
             }
 
-            sumDebitList = sumDebitList.OrderBy(item => item.Item2).ToList();
-            float lightnessIncrement = 0.2f;
-            int i = 0;
+            sumDebitList = sumDebitList.OrderBy(item => item.Item2).ToList(); 
+            int i = 0; 
             foreach (var sumItem in sumDebitList)
             {
                 if (sumItem.Item2 == 0.0) continue;
@@ -124,7 +137,8 @@ namespace AnalysisDashboard.Pages
                 newItem.Code = sumItem.Item1;
                 newItem.Amount = sumItem.Item2;
                 newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
-                newItem.Color = getRandColor(System.Drawing.Color.Red, -i * lightnessIncrement);
+                if (i < ColorTable.ColorDebitList.Count)
+                    newItem.Color = ColorTable.ColorDebitList[i];
 
                 await jsRuntime.InvokeVoidAsync("addDebitBar", newItem);
                 i++;
@@ -149,16 +163,16 @@ namespace AnalysisDashboard.Pages
                 sumCreditList.Add((group.Key, group.Sum(item => item.Credit)));
             }
 
-            sumCreditList = sumCreditList.OrderBy(item => item.Item2).ToList();
-            float lightnessIncrement = 0.2f;
-            int i = 0;
+            sumCreditList = sumCreditList.OrderBy(item => item.Item2).ToList(); 
+            int i = 0; 
             foreach (var sumItem in sumCreditList)
             {
                 BarChartInfo newItem = new BarChartInfo();
                 newItem.Code = sumItem.Item1;
                 newItem.Amount = sumItem.Item2;
                 newItem.Name = CodeTable.Instance.GetData(sumItem.Item1).Trim();
-                newItem.Color = getRandColor(System.Drawing.Color.FromArgb(154, 205, 50), -i * lightnessIncrement);
+                if (i < ColorTable.ColorCreditList.Count)
+                    newItem.Color = ColorTable.ColorCreditList[i];  
 
                 await jsRuntime.InvokeVoidAsync("addBarCredit", newItem);
                 i++;
@@ -253,8 +267,8 @@ namespace AnalysisDashboard.Pages
         {
             forward = 0;
             clickedMonth = true;
-            ClickedMonthStyle = ClickedStyle + "color: blue;";
-            ClickedWeekStyle = "color: gray;";
+            ClickedMonthStyle = ClickedStyle + "color: #0077b6;";
+            ClickedWeekStyle = "color: #343A40;";
 
             await SortByMonth(0);
         }
@@ -263,8 +277,8 @@ namespace AnalysisDashboard.Pages
         {
             forward = 0;
             clickedMonth = false;
-            ClickedWeekStyle = ClickedStyle + "color: blue;";
-            ClickedMonthStyle = "color: gray;";
+            ClickedWeekStyle = ClickedStyle + "color: #0077b6;";
+            ClickedMonthStyle = "color: #343A40;";
 
             await SortByWeek(0);
         }
@@ -382,7 +396,7 @@ namespace AnalysisDashboard.Pages
             float h, s, l;
             ColorToHSL(baseColor, out h, out s, out l);
 
-            l = Math.Max(Math.Min(l - lightnessIncrement, 1.0f), 0.0f); 
+            l = Math.Max(Math.Min(l + lightnessIncrement, 1.0f), 0.0f); 
             System.Drawing.Color color = HSLToColor(h, s, l);
 
             return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
@@ -449,8 +463,7 @@ namespace AnalysisDashboard.Pages
                 h /= 6;
             }
         }
-
-        // Convert HSL to RGB
+         
         System.Drawing.Color HSLToColor(float h, float s, float l)
         {
             if (s == 0)

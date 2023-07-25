@@ -62,7 +62,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-var supportedCultures = new[] { "ru-RU", "uz-UZ", "uz-Cyrl", "en-US" };
+var supportedCultures = new[] { "ru-RU", "uz-UZ", "uz-Cyrl"/*, "en-US"*/ };
 var localizationOptions = new RequestLocalizationOptions()
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures)
