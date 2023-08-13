@@ -29,6 +29,17 @@ builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<DataInfo>();
 
+//builder.ServicesRootComponents.Add<App>("app");
+//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://finalytix.uz/") });
+
+
+//builder.Services.AddServerSideBlazor()
+//    .AddHubOptions(options =>
+//    {
+//        options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
+//        options.HandshakeTimeout = TimeSpan.FromSeconds(30);
+//    });
+
 //builder.Services.AddSingleton<WeatherForecastService>();
 
 //var cultureInfo = new CultureInfo("ru-RU");
@@ -57,7 +68,7 @@ if (!app.Environment.IsDevelopment())
 //var localizationOptions = new RequestLocalizationOptions()
 //                .AddSupportedCultures(supportedCultures)
 //                .AddSupportedUICultures(supportedCultures);
-
+ 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();

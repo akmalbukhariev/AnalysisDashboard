@@ -20,6 +20,10 @@ namespace AnalysisDashboard.Pages
         { 
             try
             {
+                if (dataInfo != null)
+                {
+                    dataInfo.Data?.Clear();
+                }
                 ShowLoading = true;
                 var file = e.File;
                 if (file != null)

@@ -27,7 +27,8 @@
    </thead>
 </table>
 <LanguageView/>
- <div class="big_container">   
+ <div class="big_container">
+	 <LoadingView Loading="ShowLoading"/> 
 	<div class="tableOverlay" style="display: @(ShowTable ? "block" : "none")">
 		<div style="width: 750px" align="center" class="popup">
 			<h3>@Localizer["BreakdownChart"]</h3>
@@ -150,7 +151,7 @@
 				</tr>
 				<tr class="int_horizontal"><td></td></tr>
 				<tr class="int_horizontal"><td></td></tr>
-				<tr> 
+				<tr>  
 					<td class="gen_td" colspan="6" style="width: 100%; min-width: 500px; padding: 15px 30px 30px 30px;">
 						<table style="width: 100%;" class="tab_pie">
 							<thead>
