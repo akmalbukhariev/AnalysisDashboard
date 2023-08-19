@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
  
@@ -28,31 +29,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 builder.Services.AddSingleton<UserAccountService>();
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<DataInfo>();
-
-//builder.ServicesRootComponents.Add<App>("app");
-//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://finalytix.uz/") });
-
-
-//builder.Services.AddServerSideBlazor()
-//    .AddHubOptions(options =>
-//    {
-//        options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
-//        options.HandshakeTimeout = TimeSpan.FromSeconds(30);
-//    });
-
-//builder.Services.AddSingleton<WeatherForecastService>();
-
-//var cultureInfo = new CultureInfo("ru-RU");
-//CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-//CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
-//builder.Services.Configure<RequestLocalizationOptions>(options =>
-//{
-//    options.SupportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("uz-UZ"), new CultureInfo("uz-Cyrl"), new CultureInfo("ru-RU") };
-//    options.SupportedUICultures = new[] { new CultureInfo("en-US"), new CultureInfo("uz-UZ"), new CultureInfo("uz-Cyrl"), new CultureInfo("ru-RU") };
-//    options.DefaultRequestCulture = new RequestCulture("ru-RU");  
-//});
-
+ 
+  
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -69,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 //                .AddSupportedCultures(supportedCultures)
 //                .AddSupportedUICultures(supportedCultures);
  
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
